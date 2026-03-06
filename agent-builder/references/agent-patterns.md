@@ -53,11 +53,11 @@ Summarize what was built, what tests were added, and any manual steps needed.
 
 ---
 
-## Pattern 2: Research → Plan → Execute
+## Pattern 2: Research → Consolidate → Plan → Execute
 
-**When to use**: Tasks that require understanding before action. The agent first explores, then plans, then implements.
+**When to use**: Tasks that require understanding before action. The agent first explores (in parallel), consolidates findings, then plans, then implements.
 
-**How it works**: An explore-phase subagent (read-only, fast) gathers context. A planning step synthesizes the findings. Then execution happens with full tool access.
+**How it works**: Multiple explore-phase subagents (read-only, fast) gather context in parallel across different sources. A consolidation step cross-references results, removes outdated info, and ranks by source reliability. Then a planning step synthesizes the consolidated findings. Finally, execution happens with full tool access.
 
 **Example — Codebase Migration Agent**:
 
@@ -281,7 +281,7 @@ Keep reviews constructive and specific. Include code suggestions where appropria
 | Scenario | Best Pattern |
 |----------|-------------|
 | Multi-step workflow, user-triggered | Command → Agent → Skills |
-| Need to understand before acting | Research → Plan → Execute |
+| Need to understand before acting | Research → Consolidate → Plan → Execute |
 | Multiple independent analyses | Parallel Specialists |
 | Agent should learn over time | Self-Evolving (Memory) |
 | Dangerous tools need guardrails | Hook-Guarded |

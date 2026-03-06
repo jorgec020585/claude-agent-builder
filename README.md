@@ -87,7 +87,7 @@ Agent Builder operates in **6 phases**, adapting to how much context you provide
 ```
   🔍 CONTEXT SCAN →  Reads your project files + conversation history automatically
   📋 DISCOVERY    →  Only asks what it can't figure out itself
-  🌐 RESEARCH     →  GitHub repos, blogs, community patterns, official docs
+  🌐 RESEARCH     →  Parallel search (GitHub + blogs + docs + community) → consolidated brief
   📐 ARCHITECTURE →  Proposes agents, gets your explicit approval before building
   🔨 BUILD        →  Writes all agent files directly into your project
   ✅ VERIFY       →  Self-checks everything, shows you what was built, asks for final OK
@@ -101,14 +101,14 @@ Agent Builder operates in **6 phases**, adapting to how much context you provide
 | You write from blank `.md` files | It writes production-ready files directly into your project |
 | You guess at descriptions and tools | It optimizes for auto-triggering |
 | You explain your project from scratch | It scans your codebase and conversation history first |
-| You don't know what exists already | It searches GitHub and blogs for best practices |
+| You don't know what exists already | It searches GitHub, blogs, docs, and community in parallel — then consolidates |
 | Trial and error | Proposes → you approve → it builds → it verifies |
 
 ## 📦 What's Inside
 
 ```
 agent-builder/
-├── SKILL.md                       # Core skill — 5-phase agent building workflow
+├── SKILL.md                       # Core skill — 6-phase agent building workflow
 ├── references/
 │   ├── primitives-guide.md        # Complete guide to all Claude Code building blocks
 │   └── agent-patterns.md          # 7 battle-tested multi-agent architecture patterns
@@ -124,7 +124,7 @@ The skill knows **7 proven patterns** and selects the right one for your use cas
 | Pattern | Best For | Example |
 |---------|----------|---------|
 | **Command → Agent → Skills** | Multi-step pipelines | Full-stack feature builder |
-| **Research → Plan → Execute** | Understanding before acting | Codebase migration |
+| **Research → Consolidate → Plan → Execute** | Understanding before acting | Codebase migration |
 | **Parallel Specialists** | Independent analyses | Security + perf + style review |
 | **Self-Evolving Agent** | Learning over time | Project onboarding guide |
 | **Hook-Guarded Agent** | Safety-critical workflows | Read-only database analyst |

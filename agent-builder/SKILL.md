@@ -78,37 +78,92 @@ Pick only the questions that weren't answered by the context scan:
 
 ## Phase 2: Research — Find the Best Approach
 
-This is where you become a researcher. Before designing anything, search for what already exists.
+This is where you become a researcher. Before designing anything, search for what already exists. **Run all research tracks in parallel** — don't wait for one to finish before starting the next.
 
-### What to Search For
+### Step 1: Parallel Fan-Out Search
 
-Use web search aggressively. Look for:
+Launch ALL four research tracks simultaneously using the Agent tool or parallel web searches. Do NOT run them sequentially.
 
-1. **GitHub repos** with similar agents or Claude Code configurations
-   - Search: `site:github.com claude code agent [domain]`
-   - Search: `site:github.com .claude/agents [use-case keyword]`
-   - Search: `claude code subagent [specific task]`
-2. **Blog posts and tutorials** on the specific use case
-   - Search: `claude code agent [use case] tutorial`
-   - Search: `claude agent SDK [domain] example`
-   - Search: `building agents claude code [specific workflow]`
-3. **Community patterns** from forums and discussions
-   - Search: `claude code agent best practices [domain]`
-   - Search: `claude code hooks skills [workflow type]`
-4. **Official documentation** for any APIs or services the agent will integrate with
-5. **Similar tools** — even non-Claude solutions can inspire good architecture
-   - Search: `AI agent [task] automation` to see what patterns others use
+**Track A — GitHub Repos** (find working implementations):
+- Search: `site:github.com claude code agent [domain]`
+- Search: `site:github.com .claude/agents [use-case keyword]`
+- Search: `claude code subagent [specific task]`
+- Look for: file structures, tool lists, system prompts, YAML frontmatter patterns
 
-### Research Output
+**Track B — Blog Posts & Tutorials** (find explained approaches):
+- Search: `claude code agent [use case] tutorial`
+- Search: `claude agent SDK [domain] example`
+- Search: `building agents claude code [specific workflow]`
+- Look for: step-by-step guides, lessons learned, architecture decisions
 
-After researching, synthesize your findings into a brief for the user:
+**Track C — Official Documentation** (find canonical patterns):
+- Anthropic docs for Claude Code primitives (subagents, skills, hooks, commands, MCP, Agent SDK)
+- Official docs for any APIs or services the agent will integrate with
+- Look for: supported parameters, current API versions, deprecation notices
 
-- **Existing solutions found**: "I found 3 GitHub repos with similar agents. Here's what they do well and where they fall short..."
-- **Best practices identified**: "The community consensus for this type of agent is to use X pattern because..."
-- **Architecture inspiration**: "Based on what I found, the strongest approach would combine..."
-- **Gaps to fill**: "Nothing I found handles [specific aspect]. We'll need to build that from scratch."
+**Track D — Community Patterns & Discussions** (find battle-tested advice):
+- Search: `claude code agent best practices [domain]`
+- Search: `claude code hooks skills [workflow type]`
+- Search: `AI agent [task] automation` (non-Claude solutions can inspire architecture)
+- Look for: gotchas, failure modes, community consensus on approaches
 
-Share links. Let the user see what you found. This builds trust and helps them make informed decisions.
+**Why parallel?** Sequential research wastes time — each track is independent. Launch them all at once, then consolidate the results.
+
+### Step 2: Research Consolidation
+
+**CRITICAL: Do NOT pass raw research results to the Architecture phase.** Raw results from 4 parallel tracks will contain duplicates, contradictions, and outdated information. First, run a consolidation pass.
+
+#### Consolidation Checklist
+
+1. **Cross-reference sources for version conflicts**: If a GitHub repo uses one approach but official docs recommend another, flag the conflict. Check dates — a 2024 blog post may reference deprecated APIs.
+
+2. **Apply source reliability ranking** (highest to lowest):
+   - Official Anthropic documentation (canonical, always trust)
+   - Production GitHub repos with recent commits and real usage
+   - Recent blog posts (< 6 months old) with working code examples
+   - Community forum discussions with upvotes/agreement
+   - Older blog posts or repos with no recent activity (treat as potentially stale)
+
+3. **Remove deprecated and outdated patterns**: If a source recommends something that official docs explicitly say is deprecated or changed, discard it. Don't just flag it — remove it from the brief entirely.
+
+4. **Deduplicate**: Multiple sources often describe the same pattern differently. Merge them into a single entry and cite the best source.
+
+5. **Classify what remains** into three categories:
+   - **Confirmed current patterns**: Backed by official docs or multiple reliable sources. Include the source link.
+   - **Experimental/emerging patterns**: Mentioned in 1-2 sources, looks promising but unproven. Flag as `[EXPERIMENTAL]`.
+   - **Patterns to avoid**: Deprecated, known-broken, or explicitly discouraged. Include the reason.
+
+#### Consolidation Output
+
+Produce a single clean **Research Brief** — this is what feeds into the Architecture phase:
+
+```
+RESEARCH BRIEF
+
+Confirmed Patterns:
+  • [Pattern name] — [what it does] — Source: [link]
+  • [Pattern name] — [what it does] — Source: [link]
+
+Experimental (use with caution):
+  • [Pattern name] — [why it's promising] — [why it's unproven] — Source: [link]
+
+Avoid:
+  • [Pattern name] — [why] — Deprecated since [date/version]
+
+Key Findings:
+  • [Insight that affects architecture decisions]
+  • [Gap — nothing found for this aspect, must build from scratch]
+```
+
+### Step 3: Share with the User
+
+Present the consolidated brief to the user before moving to Architecture. Include:
+
+- **What you found**: The clean brief above, with clickable source links
+- **Your recommendation**: "Based on this research, I'd recommend [approach] because [reasoning]"
+- **Gaps identified**: "Nothing I found handles [specific aspect]. We'll build that from scratch."
+
+This builds trust — the user sees you did real research, not just guessed. Then pass ONLY the consolidated brief to Phase 3 (Architecture).
 
 ---
 
@@ -137,8 +192,8 @@ For complex use cases, combine primitives. Common patterns:
 **Pattern 1: Command → Agent → Skills**
 A slash command triggers a subagent that auto-loads relevant skills. Good for multi-step workflows.
 
-**Pattern 2: Research → Plan → Execute**
-An explore subagent researches, a plan subagent designs the approach, then the main agent (or a specialized subagent) executes.
+**Pattern 2: Research → Consolidate → Plan → Execute**
+Multiple explore subagents research in parallel, results are consolidated (cross-referenced, deduplicated, ranked by reliability), a plan subagent designs the approach, then the main agent (or a specialized subagent) executes.
 
 **Pattern 3: Parallel Specialists**
 Multiple subagents run in parallel on different aspects of a problem, then results are synthesized.
