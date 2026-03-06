@@ -25,26 +25,49 @@ Building agents in Claude Code means juggling **7 different primitives** (subage
 
 ## ⚡ Quick Start
 
-**One-line install** (user-level — works in all projects):
+### macOS / Linux
 
 ```bash
 git clone https://github.com/keysersoose/claude-agent-builder.git && cp -r claude-agent-builder/agent-builder ~/.claude/skills/
+```
+
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/keysersoose/claude-agent-builder.git; Copy-Item -Recurse claude-agent-builder\agent-builder "$env:USERPROFILE\.claude\skills\agent-builder"
+```
+
+### Windows (CMD)
+
+```cmd
+git clone https://github.com/keysersoose/claude-agent-builder.git && xcopy /E /I claude-agent-builder\agent-builder "%USERPROFILE%\.claude\skills\agent-builder"
 ```
 
 <details>
 <summary>Other install methods</summary>
 
 ```bash
-# Project-level only (this project only)
-git clone https://github.com/keysersoose/claude-agent-builder.git
-cp -r claude-agent-builder/agent-builder .claude/skills/
-
-# Using the install script
+# macOS/Linux — install script
 git clone https://github.com/keysersoose/claude-agent-builder.git
 cd claude-agent-builder && ./install.sh
 
-# Project-level via install script
+# macOS/Linux — project-level only
 ./install.sh --project
+```
+
+```powershell
+# Windows — install script (PowerShell)
+git clone https://github.com/keysersoose/claude-agent-builder.git
+cd claude-agent-builder; .\install.ps1
+
+# Windows — project-level only
+.\install.ps1 -Project
+```
+
+```bash
+# Any platform — project-level manual
+git clone https://github.com/keysersoose/claude-agent-builder.git
+cp -r claude-agent-builder/agent-builder .claude/skills/
 ```
 
 </details>
