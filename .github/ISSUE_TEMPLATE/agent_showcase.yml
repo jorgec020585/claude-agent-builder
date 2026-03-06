@@ -1,0 +1,38 @@
+name: Agent Showcase
+description: Share an agent you built with Claude Agent Builder
+title: "[Showcase]: "
+labels: ["showcase", "community"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Built something cool? Share it with the community! The best showcases may be added to the examples directory.
+  - type: textarea
+    id: description
+    attributes:
+      label: What does your agent do?
+      description: A brief description of your agent system.
+      placeholder: "I built an agent that automatically reviews my PRs for..."
+    validations:
+      required: true
+  - type: textarea
+    id: architecture
+    attributes:
+      label: Architecture
+      description: Which pattern(s) did you use? What primitives are involved?
+      placeholder: "Uses the Parallel Specialists pattern with 3 subagents..."
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Agent files
+      description: Share the key agent/skill/command files (or link to a repo).
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: lessons
+    attributes:
+      label: What did you learn?
+      description: Tips, gotchas, or insights from building this.
