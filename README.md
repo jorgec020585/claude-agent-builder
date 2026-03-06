@@ -82,14 +82,15 @@ The skill triggers automatically. That's it.
 
 ## 🧠 How It Works
 
-Agent Builder operates in **5 phases**, adapting to how much context you provide:
+Agent Builder operates in **6 phases**, adapting to how much context you provide:
 
 ```
-  📋 DISCOVERY    →  Smart questions, scenario walk-throughs, edge cases
+  🔍 CONTEXT SCAN →  Reads your project files + conversation history automatically
+  📋 DISCOVERY    →  Only asks what it can't figure out itself
   🌐 RESEARCH     →  GitHub repos, blogs, community patterns, official docs
-  📐 ARCHITECTURE →  Primitive selection, pattern matching, system design
-  🔨 BUILD        →  Agents, skills, hooks, commands, MCP config, CLAUDE.md
-  🔄 REFINE       →  Validation, testing instructions, iteration
+  📐 ARCHITECTURE →  Proposes agents, gets your explicit approval before building
+  🔨 BUILD        →  Writes all agent files directly into your project
+  ✅ VERIFY       →  Self-checks everything, shows you what was built, asks for final OK
 ```
 
 ### Why not just ask Claude directly?
@@ -97,10 +98,11 @@ Agent Builder operates in **5 phases**, adapting to how much context you provide
 | Without Agent Builder | With Agent Builder |
 |---|---|
 | You need to know all 7 primitives | It picks the right ones for you |
-| You write from blank `.md` files | It generates production-ready files |
+| You write from blank `.md` files | It writes production-ready files directly into your project |
 | You guess at descriptions and tools | It optimizes for auto-triggering |
-| You don't know what exists already | It searches GitHub and blogs first |
-| Trial and error | Researched, validated architecture |
+| You explain your project from scratch | It scans your codebase and conversation history first |
+| You don't know what exists already | It searches GitHub and blogs for best practices |
+| Trial and error | Proposes → you approve → it builds → it verifies |
 
 ## 📦 What's Inside
 
